@@ -51,7 +51,7 @@
 
   .layout { display: flex; height: calc(100vh - 56px); }
   .sidebar { width: 230px; flex-shrink: 0; background: #E5DFF5; overflow-y: auto; }
-  .main { flex: 1; overflow-y: auto; padding: 20px 24px; }
+  .main { flex: 1; overflow-y: auto; padding: 0 24px 20px; }
 
   .sidebar-section { padding: 12px 0 4px; }
   .sidebar-label { font-size: 11px; font-weight: 600; color: #A99DC2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 14px 6px; }
@@ -75,7 +75,7 @@
   .sub-item .count { margin-left: auto; font-size: 11px; background: rgba(91,63,212,0.08); color: #A99DC2; padding: 1px 6px; border-radius: 10px; }
   .sub-item.active .count { background: rgba(91,63,212,0.15); color: #5B3FD4; }
 
-  .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; position: sticky; top: 0; z-index: 90; background: var(--bg); padding: 12px 0 10px; margin-top: -4px; box-shadow: 0 12px 16px 4px var(--bg); }
+  .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; position: sticky; top: 0; z-index: 90; background: var(--bg); padding: 20px 0 10px; box-shadow: 0 12px 16px 4px var(--bg); }
   .search-wrap { position: relative; flex: 1; min-width: 180px; max-width: 320px; }
   .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-faint); pointer-events: none; width: 15px; height: 15px; }
   .search-input { width: 100%; padding: 9px 12px 9px 34px; border: 2px solid var(--border); border-radius: 999px; background: var(--surface); font-size: 13px; color: var(--text); outline: none; }
