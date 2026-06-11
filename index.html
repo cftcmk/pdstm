@@ -88,9 +88,7 @@
   .card { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.15s; position: relative; }
   .card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(91,63,212,0.15); transform: translateY(-2px); }
   .card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(91,63,212,0.2); }
-  .card-checkbox { position: absolute; top: 8px; left: 8px; z-index: 2; }
-  .card-checkbox input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent); }
-  .card-img-wrap { aspect-ratio: 1; overflow: hidden; background: var(--surface2); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .card-img-wrap { aspect-ratio: 1; overflow: hidden; background: var(--surface2); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
   .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 8px; transition: transform 0.2s; }
   .card:hover .card-img-wrap img { transform: scale(1.04); }
   .no-img { color: var(--text-faint); font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
@@ -147,6 +145,30 @@
   .tag-option:hover { border-color: var(--accent); color: var(--accent); }
   .tag-option.selected { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); font-weight: 500; }
 
+  .card-select-overlay { position: absolute; inset: 0; background: rgba(91,63,212,0.18); display: none; align-items: center; justify-content: center; }
+  .card.selected .card-select-overlay { display: flex; }
+  .card-select-check { width: 28px; height: 28px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .card-select-check svg { width: 16px; height: 16px; color: #fff; }
+
+  /* Category management modal */
+  .cat-manage-list { display: flex; flex-direction: column; gap: 12px; }
+  .cat-manage-item { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .cat-manage-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--surface2); font-weight: 600; font-size: 13px; }
+  .cat-manage-header input { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 13px; background: var(--surface); color: var(--text); outline: none; }
+  .cat-manage-header input:focus { border-color: var(--accent); }
+  .cat-manage-subs { padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .sub-tag-edit { display: flex; align-items: center; gap: 4px; background: var(--accent-bg); border: 1px solid #BFDBFE; border-radius: 20px; padding: 2px 6px 2px 10px; font-size: 12px; color: var(--accent); }
+  .sub-tag-edit button { width: 16px; height: 16px; border: none; background: none; cursor: pointer; color: var(--accent); padding: 0; display: flex; align-items: center; justify-content: center; opacity: 0.7; }
+  .sub-tag-edit button:hover { opacity: 1; }
+  .add-sub-row { display: flex; gap: 6px; margin-top: 4px; width: 100%; }
+  .add-sub-row input { flex: 1; border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; background: var(--surface); color: var(--text); outline: none; }
+  .add-sub-row input:focus { border-color: var(--accent); }
+  .add-sub-row button { padding: 3px 10px; border-radius: 20px; border: 1px solid var(--accent); background: var(--accent-bg); color: var(--accent); font-size: 12px; cursor: pointer; font-weight: 600; white-space: nowrap; }
+  .add-sub-row button:hover { background: var(--accent); color: #fff; }
+  .cat-del-btn { margin-left: auto; padding: 3px 8px; border-radius: 6px; border: 1px solid #FECACA; background: #FEF2F2; color: var(--danger); font-size: 11px; cursor: pointer; }
+  .cat-del-btn:hover { background: #FEE2E2; }
+  .add-cat-row { display: flex; gap: 8px; margin-top: 4px; }
+  .add-cat-row input { flex: 1; border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 7px 11px; font-size: 13px; background: var(--surface); color: var(--text); outline: none; }
   .img-preview-box { width: 100%; aspect-ratio: 2.5; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface2); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
   .img-preview-box img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 8px; }
   .img-placeholder { font-size: 12px; color: var(--text-faint); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
@@ -164,12 +186,7 @@
 
   @media (max-width: 640px) { .sidebar { display: none; } }
 
-  /* Stars decoration */
-  .stars-deco { position: fixed; bottom: 30px; right: 36px; pointer-events: none; z-index: 5; width: 100px; height: 100px; }
-  .star { position: absolute; }
-  .star-1 { width: 32px; height: 44px; bottom: 20px; right: 18px; opacity: 0.85; }
-  .star-2 { width: 16px; height: 22px; bottom: 4px; right: 0; opacity: 0.6; }
-  .star-3 { width: 13px; height: 18px; bottom: 58px; right: 52px; opacity: 0.45; }
+
 </style>
 </head>
 <body>
@@ -182,6 +199,10 @@
     <span id="statusText">連線中…</span>
   </div>
   <div class="header-actions">
+    <button class="btn" onclick="openCatManager()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/><circle cx="18" cy="18" r="3"/><path d="M18 15v3M18 21v0M15 18h3M21 18h0" stroke-width="2"/></svg>
+      管理分類
+    </button>
     <button class="btn" onclick="syncFromSheet()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
       同步圖庫
@@ -196,11 +217,7 @@
 <div class="layout">
   <div class="sidebar" id="sidebar"></div>
   <div class="main">
-    <div class="stars-deco" aria-hidden="true">
-      <svg class="star star-1" viewBox="0 0 24 32" fill="#3D24A8"><path d="M12 0c.5 8.7 4.6 15.2 12 16-7.4.8-11.5 7.3-12 16-.5-8.7-4.6-15.2-12-16 7.4-.8 11.5-7.3 12-16z"/></svg>
-      <svg class="star star-2" viewBox="0 0 24 32" fill="#3D24A8"><path d="M12 0c.5 8.7 4.6 15.2 12 16-7.4.8-11.5 7.3-12 16-.5-8.7-4.6-15.2-12-16 7.4-.8 11.5-7.3 12-16z"/></svg>
-      <svg class="star star-3" viewBox="0 0 24 32" fill="#3D24A8"><path d="M12 0c.5 8.7 4.6 15.2 12 16-7.4.8-11.5 7.3-12 16-.5-8.7-4.6-15.2-12-16 7.4-.8 11.5-7.3 12-16z"/></svg>
-    </div>
+
     <div class="toolbar">
       <div class="search-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -285,6 +302,29 @@
   </div>
 </div>
 
+<!-- Category Manager Modal -->
+<div class="modal-bg" id="catModal">
+  <div class="modal form-modal" style="max-width:520px">
+    <div class="modal-header">
+      <div class="modal-title">管理分類</div>
+      <button class="modal-close" onclick="closeModal('catModal')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="cat-manage-list" id="catManageList"></div>
+      <div class="add-cat-row" style="margin-top:16px">
+        <input id="newCatInput" placeholder="新增大分類名稱…" onkeydown="if(event.key==='Enter')addCat()">
+        <button class="btn btn-primary btn-sm" onclick="addCat()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          新增大分類
+        </button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="saveCats()">儲存</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -330,7 +370,15 @@ function load() {
   try { images = JSON.parse(localStorage.getItem(IMAGES_KEY)) || []; } catch { images = []; }
   try { cats = JSON.parse(localStorage.getItem(CATS_KEY)) || DEFAULT_CATS; } catch { cats = DEFAULT_CATS; }
   if (!localStorage.getItem(CATS_KEY)) localStorage.setItem(CATS_KEY, JSON.stringify(DEFAULT_CATS));
-  try { collapsedCats = new Set(JSON.parse(localStorage.getItem(COLLAPSED_KEY)) || []); } catch { collapsedCats = new Set(); }
+  // Default: collapse all cats on first visit
+  try {
+    const saved = localStorage.getItem(COLLAPSED_KEY);
+    if (saved !== null) {
+      collapsedCats = new Set(JSON.parse(saved));
+    } else {
+      collapsedCats = new Set(cats.map(c => c.id));
+    }
+  } catch { collapsedCats = new Set(cats.map(c => c.id)); }
 }
 
 function saveLocal() {
@@ -455,8 +503,7 @@ function setFilter(type, catId=null, subId=null) {
 function toggleCat(catId) {
   if (collapsedCats.has(catId)) collapsedCats.delete(catId); else collapsedCats.add(catId);
   localStorage.setItem(COLLAPSED_KEY, JSON.stringify(Array.from(collapsedCats)));
-  filterState = { type: 'cat', catId, subId: null };
-  renderSidebar(); renderGrid();
+  renderSidebar();
 }
 
 // ── Grid ──────────────────────────────────────────────────────────────────────
@@ -487,8 +534,10 @@ function renderGrid() {
     const tagsHtml = [...catNames.map(n=>`<span class="tag tag-main">${n}</span>`), ...subNames.slice(0,2).map(n=>`<span class="tag tag-sub">${n}</span>`), subNames.length>2?`<span class="tag tag-sub">+${subNames.length-2}</span>`:''].join('');
 
     return `<div class="card ${selectedIds.has(img.id)?'selected':''}" id="card-${img.id}">
-      <div class="card-checkbox"><input type="checkbox" ${selectedIds.has(img.id)?'checked':''} onclick="toggleSelect(event,'${img.id}')"></div>
-      <div class="card-img-wrap" onclick="openPreview('${img.id}')">
+      <div class="card-img-wrap" onclick="toggleSelect(event,'${img.id}')">
+        <div class="card-select-overlay">
+          <div class="card-select-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        </div>
         ${img.url
           ? `<img src="${img.url}" alt="${img.name}" style="width:100%;height:100%;object-fit:contain;padding:8px" onerror="this.style.display='none'">`
           : `<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>未設定圖片</span></div>`}
@@ -509,7 +558,6 @@ function render() { renderSidebar(); renderGrid(); }
 
 // ── Selection & Download ──────────────────────────────────────────────────────
 function toggleSelect(e, id) {
-  e.stopPropagation();
   if (selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id);
   document.getElementById('card-'+id)?.classList.toggle('selected', selectedIds.has(id));
   updateBatchBar();
@@ -648,6 +696,80 @@ let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ── Category Manager ──────────────────────────────────────────────────────────
+let editingCats = [];
+
+function openCatManager() {
+  editingCats = JSON.parse(JSON.stringify(cats)); // deep copy
+  renderCatManager();
+  openModal('catModal');
+}
+
+function renderCatManager() {
+  const list = document.getElementById('catManageList');
+  list.innerHTML = editingCats.map((cat, ci) => `
+    <div class="cat-manage-item">
+      <div class="cat-manage-header">
+        <input value="${escHtml(cat.name)}" placeholder="大分類名稱" onchange="editingCats[${ci}].name=this.value">
+        <button class="cat-del-btn" onclick="deleteCatEdit(${ci})">刪除分類</button>
+      </div>
+      <div class="cat-manage-subs">
+        ${cat.subs.map((sub, si) => `
+          <div class="sub-tag-edit">
+            <span>${escHtml(sub.name)}</span>
+            <button onclick="deleteSubEdit(${ci},${si})" title="刪除">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="10" height="10"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>`).join('')}
+        <div class="add-sub-row">
+          <input id="newSub-${ci}" placeholder="新子分類…" onkeydown="if(event.key==='Enter')addSubEdit(${ci})">
+          <button onclick="addSubEdit(${ci})">＋ 新增</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function deleteCatEdit(ci) {
+  if (!confirm(`確定刪除分類「${editingCats[ci].name}」及其所有子分類？`)) return;
+  editingCats.splice(ci, 1);
+  renderCatManager();
+}
+
+function deleteSubEdit(ci, si) {
+  editingCats[ci].subs.splice(si, 1);
+  renderCatManager();
+}
+
+function addSubEdit(ci) {
+  const input = document.getElementById(`newSub-${ci}`);
+  const name = input.value.trim();
+  if (!name) return;
+  editingCats[ci].subs.push({ id: uid(), name });
+  renderCatManager();
+}
+
+function addCat() {
+  const input = document.getElementById('newCatInput');
+  const name = input.value.trim();
+  if (!name) { showToast('請輸入分類名稱'); return; }
+  editingCats.push({ id: uid(), name, subs: [] });
+  input.value = '';
+  renderCatManager();
+}
+
+function saveCats() {
+  cats = editingCats;
+  localStorage.setItem(CATS_KEY, JSON.stringify(cats));
+  // Rebuild collapsed set to include any new cats
+  cats.forEach(c => { if (!collapsedCats.has(c.id)) collapsedCats.add(c.id); });
+  localStorage.setItem(COLLAPSED_KEY, JSON.stringify(Array.from(collapsedCats)));
+  closeModal('catModal');
+  render();
+  showToast('分類已儲存');
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
