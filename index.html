@@ -407,8 +407,18 @@ async function syncFromSheet() {
       const viewUrl = (cols[4] || '').trim();
       if (!name) return;
 
-      const cat = cats.find(c => c.name === catName);
-      const sub = cat ? cat.subs.find(s => s.name === subName) : null;
+      let cat = cats.find(c => c.name === catName);
+      // Auto-create missing cat
+      if (!cat && catName) {
+        cat = { id: uid(), name: catName, subs: [] };
+        cats.push(cat);
+      }
+      let sub = cat ? cat.subs.find(s => s.name === subName) : null;
+      // Auto-create missing sub
+      if (!sub && subName && cat) {
+        sub = { id: uid(), name: subName };
+        cat.subs.push(sub);
+      }
       const existing = images.find(i => i.dlUrl === dlUrl && dlUrl);
       if (existing) {
         newImages.push(existing);
@@ -422,6 +432,7 @@ async function syncFromSheet() {
       }
     });
     images = newImages;
+    localStorage.setItem(CATS_KEY, JSON.stringify(cats));
     saveLocal(); render();
     setStatus('ok', `已同步 ${images.length} 張`);
     showToast(`同步完成，共 ${images.length} 張圖片`);
