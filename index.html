@@ -7,16 +7,16 @@
 <title>商品圖庫</title>
 <style>
   :root {
-    --bg: #F5F0E8;
-    --surface: #FDFAF4;
-    --surface2: #EDE8DE;
-    --border: #DDD8CE;
-    --text: #1E1640;
-    --text-muted: #6B5F8A;
-    --text-faint: #A99DC2;
-    --accent: #5B3FD4;
-    --accent-bg: #EDE8FB;
-    --accent-dark: #4730B0;
+    --bg: #F4F4F4;
+    --surface: #FFFFFF;
+    --surface2: #EBEBEB;
+    --border: #DBDBDB;
+    --text: #171717;
+    --text-muted: #5C5C5C;
+    --text-faint: #A3A3A3;
+    --accent: #262626;
+    --accent-bg: #EFEFEF;
+    --accent-dark: #000000;
     --danger: #DC2626;
     --radius: 16px;
     --radius-sm: 10px;
@@ -25,9 +25,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; }
 
-  .header { background: #5158a6; border-bottom: none; padding: 0 24px; display: flex; align-items: center; height: 60px; gap: 12px; position: sticky; top: 0; z-index: 100; }
+  .header { background: #1C1C1C; border-bottom: none; padding: 0 24px; display: flex; align-items: center; height: 60px; gap: 12px; position: sticky; top: 0; z-index: 100; }
   .header-logo { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; color: #fff; }
-  .header-logo span { color: #A8F0C6; }
+  .header-logo span { color: #B5B5B5; }
   .header-count { font-size: 12px; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.15); padding: 3px 10px; border-radius: 20px; }
   .header-status { font-size: 12px; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 5px; }
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-faint); }
@@ -38,8 +38,8 @@
   .header-actions { margin-left: auto; display: flex; gap: 8px; }
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: var(--radius-pill); border: 1.5px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.15); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
   .btn:hover { background: rgba(255,255,255,0.25); }
-  .btn-primary { background: #A8F0C6; color: #1E1640; border-color: #A8F0C6; }
-  .btn-primary:hover { background: #7EDBA8; border-color: #7EDBA8; }
+  .btn-primary { background: #FFFFFF; color: #171717; border-color: #FFFFFF; }
+  .btn-primary:hover { background: #E0E0E0; border-color: #E0E0E0; }
   .btn-danger { color: var(--danger); border-color: #FECACA; background: #FEF2F2; }
   .btn-danger:hover { background: #FEE2E2; }
   .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
@@ -50,44 +50,44 @@
   .main .btn-primary:hover, .modal .btn-primary:hover, .toolbar .btn-primary:hover, .batch-bar .btn-primary:hover { background: var(--accent-dark); }
 
   .layout { display: flex; height: calc(100vh - 56px); }
-  .sidebar { width: 230px; flex-shrink: 0; background: #E5DFF5; overflow-y: auto; }
+  .sidebar { width: 230px; flex-shrink: 0; background: #EAEAEA; overflow-y: auto; }
   .main { flex: 1; overflow-y: auto; padding: 0 24px 20px; }
 
   .sidebar-section { padding: 12px 0 4px; }
-  .sidebar-label { font-size: 11px; font-weight: 600; color: #A99DC2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 14px 6px; }
-  .sidebar-item { display: flex; align-items: center; gap: 8px; padding: 6px 14px; cursor: pointer; color: #6B5F8A; font-size: 13px; transition: all 0.12s; border-left: 2px solid transparent; border-radius: 0; }
-  .sidebar-item:hover { background: rgba(91,63,212,0.08); color: #1E1640; }
-  .sidebar-item.active { background: rgba(91,63,212,0.12); color: #5B3FD4; border-left-color: #5B3FD4; font-weight: 600; }
-  .sidebar-item .count { margin-left: auto; font-size: 11px; background: rgba(91,63,212,0.08); color: #A99DC2; padding: 1px 6px; border-radius: 10px; }
-  .sidebar-item.active .count { background: rgba(91,63,212,0.15); color: #5B3FD4; }
-  .sidebar-divider { height: 1px; background: rgba(91,63,212,0.12); margin: 4px 14px; }
-  .cat-header { display: flex; align-items: center; gap: 6px; padding: 7px 14px 5px; cursor: pointer; color: #6B5F8A; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.12s; border-left: 2px solid transparent; }
-  .cat-header:hover { background: rgba(91,63,212,0.08); color: #1E1640; }
-  .cat-header.active { background: rgba(91,63,212,0.12); color: #5B3FD4; border-left-color: #5B3FD4; }
-  .cat-header .count { margin-left: auto; font-size: 11px; background: rgba(91,63,212,0.08); color: #A99DC2; padding: 1px 6px; border-radius: 10px; }
-  .cat-header.active .count { background: rgba(91,63,212,0.15); color: #5B3FD4; }
+  .sidebar-label { font-size: 11px; font-weight: 600; color: #A3A3A3; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 14px 6px; }
+  .sidebar-item { display: flex; align-items: center; gap: 8px; padding: 6px 14px; cursor: pointer; color: #5C5C5C; font-size: 13px; transition: all 0.12s; border-left: 2px solid transparent; border-radius: 0; }
+  .sidebar-item:hover { background: rgba(0,0,0,0.05); color: #171717; }
+  .sidebar-item.active { background: rgba(0,0,0,0.08); color: #171717; border-left-color: #171717; font-weight: 600; }
+  .sidebar-item .count { margin-left: auto; font-size: 11px; background: rgba(0,0,0,0.05); color: #A3A3A3; padding: 1px 6px; border-radius: 10px; }
+  .sidebar-item.active .count { background: rgba(0,0,0,0.1); color: #171717; }
+  .sidebar-divider { height: 1px; background: rgba(0,0,0,0.08); margin: 4px 14px; }
+  .cat-header { display: flex; align-items: center; gap: 6px; padding: 7px 14px 5px; cursor: pointer; color: #5C5C5C; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.12s; border-left: 2px solid transparent; }
+  .cat-header:hover { background: rgba(0,0,0,0.05); color: #171717; }
+  .cat-header.active { background: rgba(0,0,0,0.08); color: #171717; border-left-color: #171717; }
+  .cat-header .count { margin-left: auto; font-size: 11px; background: rgba(0,0,0,0.05); color: #A3A3A3; padding: 1px 6px; border-radius: 10px; }
+  .cat-header.active .count { background: rgba(0,0,0,0.1); color: #171717; }
   .cat-header .chevron { width: 12px; height: 12px; transition: transform 0.2s; flex-shrink: 0; }
   .cat-header.collapsed .chevron { transform: rotate(-90deg); }
   .sub-items.collapsed { display: none; }
-  .sub-item { display: flex; align-items: center; padding: 5px 14px 5px 28px; cursor: pointer; color: #6B5F8A; font-size: 12px; transition: all 0.12s; border-left: 2px solid transparent; }
-  .sub-item:hover { background: rgba(91,63,212,0.06); color: #1E1640; }
-  .sub-item.active { background: rgba(91,63,212,0.12); color: #5B3FD4; border-left-color: #5B3FD4; font-weight: 600; }
-  .sub-item .count { margin-left: auto; font-size: 11px; background: rgba(91,63,212,0.08); color: #A99DC2; padding: 1px 6px; border-radius: 10px; }
-  .sub-item.active .count { background: rgba(91,63,212,0.15); color: #5B3FD4; }
+  .sub-item { display: flex; align-items: center; padding: 5px 14px 5px 28px; cursor: pointer; color: #5C5C5C; font-size: 12px; transition: all 0.12s; border-left: 2px solid transparent; }
+  .sub-item:hover { background: rgba(0,0,0,0.04); color: #171717; }
+  .sub-item.active { background: rgba(0,0,0,0.08); color: #171717; border-left-color: #171717; font-weight: 600; }
+  .sub-item .count { margin-left: auto; font-size: 11px; background: rgba(0,0,0,0.05); color: #A3A3A3; padding: 1px 6px; border-radius: 10px; }
+  .sub-item.active .count { background: rgba(0,0,0,0.1); color: #171717; }
 
   .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; position: sticky; top: 0; z-index: 90; background: var(--bg); padding: 20px 0 10px; box-shadow: 0 12px 16px 4px var(--bg); }
   .search-wrap { position: relative; flex: 1; min-width: 180px; max-width: 320px; }
   .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-faint); pointer-events: none; width: 15px; height: 15px; }
   .search-input { width: 100%; padding: 9px 12px 9px 34px; border: 2px solid var(--border); border-radius: 999px; background: var(--surface); font-size: 13px; color: var(--text); outline: none; }
-  .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+  .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.08); }
   .batch-bar { display: none; align-items: center; gap: 10px; background: var(--accent-bg); border: 1px solid #BFDBFE; border-radius: var(--radius-sm); padding: 7px 12px; font-size: 13px; color: var(--accent); font-weight: 500; }
   .batch-bar.show { display: flex; }
   .toolbar-right { margin-left: auto; display: flex; gap: 8px; }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
   .card { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.15s; position: relative; }
-  .card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(91,63,212,0.15); transform: translateY(-2px); }
-  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(91,63,212,0.2); }
+  .card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.15); }
   .card-img-wrap { aspect-ratio: 1; overflow: hidden; background: var(--surface2); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
   .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 8px; transition: transform 0.2s; }
   .card:hover .card-img-wrap img { transform: scale(1.04); }
@@ -97,8 +97,8 @@
   .card-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
   .card-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 7px; min-height: 18px; }
   .tag { font-size: 10px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
-  .tag-main { background: #EDE8FB; color: #5B3FD4; }
-  .tag-sub { background: #E8E2F5; color: #6B5F8A; }
+  .tag-main { background: #E5E5E5; color: #262626; }
+  .tag-sub { background: #EFEFEF; color: #5C5C5C; }
   .card-actions { display: flex; gap: 5px; }
   .card-btn { flex: 1; padding: 5px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-muted); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px; transition: all 0.12s; }
   .card-btn:hover { background: var(--surface2); color: var(--text); }
@@ -133,7 +133,7 @@
   .form-group { margin-bottom: 14px; }
   .form-label { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 5px; display: block; }
   .form-input, .form-select { width: 100%; padding: 8px 11px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font-size: 13px; color: var(--text); outline: none; }
-  .form-input:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+  .form-input:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.08); }
   .form-hint { font-size: 11px; color: var(--text-faint); margin-top: 4px; }
 
   .tag-picker { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; background: var(--surface2); max-height: 200px; overflow-y: auto; }
@@ -190,6 +190,262 @@
 </style>
 </head>
 <body>
+
+<!-- ════════ INTRO SPLASH ════════ -->
+<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background:#F4F4F4;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s ease, visibility 0.5s;">
+  <div style="width:min(92vw,820px);">
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  #scene{position:relative;width:100%;height:min(78vh,560px);overflow:hidden;border-radius:16px;font-family:'Georgia',serif;user-select:none;}
+  .bg{position:absolute;inset:0;transition:background 0.5s ease;}
+  #word{position:absolute;font-weight:900;pointer-events:none;}
+  .window-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:138px;z-index:10;}
+
+  /* arrows at far sides, vertically between the two TDBU text lines */
+  .nav-btn{
+    position:absolute;top:47%;transform:translateY(-50%);
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,0.88);border:none;cursor:pointer;
+    font-size:20px;z-index:20;line-height:34px;text-align:center;
+    transition:background 0.15s, box-shadow 0.15s;
+    box-shadow:0 1px 6px rgba(0,0,0,0.1);
+  }
+  .nav-btn:hover{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.15);}
+  .nav-btn.left{left:10px;}
+  .nav-btn.right{right:10px;}
+
+  .floating-el{position:absolute;pointer-events:none;will-change:transform,opacity;}
+
+  /* Explore button: lifts on hover, presses on click */
+  .explore-btn{
+    position:absolute;bottom:28px;left:50%;
+    transform:translateX(-50%);
+    padding:10px 34px;border-radius:999px;
+    background:transparent;font-size:14px;cursor:pointer;
+    z-index:20;font-family:inherit;
+    border:1.5px solid currentColor;
+    transition:background 0.18s, color 0.18s, transform 0.14s, box-shadow 0.14s;
+    will-change:transform;
+  }
+  .explore-btn:hover{
+    background:#222;color:#fff!important;border-color:#222;
+    transform:translateX(-50%) translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  }
+  .explore-btn:active{
+    transform:translateX(-50%) translateY(2px)!important;
+    box-shadow:0 1px 4px rgba(0,0,0,0.1)!important;
+  }
+</style>
+
+<div id="scene">
+  <div class="bg" id="bg"></div>
+  <!-- nav removed -->
+  <div id="word"></div>
+  <div id="floats"></div>
+  <div class="window-wrap">
+    <svg viewBox="0 0 148 232" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;overflow:visible;">
+      <defs><clipPath id="gc"><rect x="14" y="22" width="120" height="188"/></clipPath></defs>
+      <rect x="14" y="22" width="120" height="188" fill="#c8e4f8"/>
+      <g clip-path="url(#gc)"><g id="slider"><g id="ca"></g><g id="cb"></g></g></g>
+      <rect x="0"   y="0"   width="148" height="22"  fill="#f2ede5"/>
+      <rect x="0"   y="0"   width="14"  height="217" fill="#f2ede5"/>
+      <rect x="134" y="0"   width="14"  height="217" fill="#f2ede5"/>
+      <rect x="14"  y="20"  width="120" height="4"   fill="#d8d0c4" opacity="0.35"/>
+      <rect x="14"  y="22"  width="3"   height="188" fill="#d8d0c4" opacity="0.22"/>
+      <rect x="131" y="22"  width="3"   height="188" fill="#d8d0c4" opacity="0.22"/>
+      <rect x="-4"  y="207" width="156" height="10"  rx="2.5" fill="#e6e0d4"/>
+      <rect x="-4"  y="213" width="156" height="5"   fill="#d8d0c4" opacity="0.4"/>
+      <rect x="14"  y="22"  width="120" height="188" fill="none" stroke="#ccc4b8" stroke-width="1"/>
+    </svg>
+  </div>
+  <button class="nav-btn left"  id="btn-left">&#8249;</button>
+  <button class="nav-btn right" id="btn-right">&#8250;</button>
+  <button class="explore-btn" id="shop-btn">Explore</button>
+</div>
+
+<script>
+const GX=14,GY=22,GW=120,GH=188;
+const products=[
+  {word:"Cellular Shade", wSz:68, wSp:7,  bg:"#d4e8f6", tc:"#1a4060", type:"cl", shape:"hex"},
+  {word:"Blackout",       wSz:80, wSp:13, bg:"#c0cad4", tc:"#18242e", type:"cb", shape:"sq"},
+  {word:"Venetian",       wSz:80, wSp:13, bg:"#ecddd0", tc:"#503820", type:"vn", shape:"sl"},
+  {word:"Zebra Roller",   wSz:70, wSp:9,  bg:"#d0e0cc", tc:"#1e3e1c", type:"zr", shape:"zb"},
+  {word:["Top Down","Bottom Up"], wSz:64, wSp:2, bg:"#ddd0e4", tc:"#3c2858", type:"td", shape:"td"},
+];
+const POSITIONS=[
+  {l:"7%",  t:"9%",  w:50},
+  {l:"79%", t:"13%", w:44},
+  {l:"7%",  t:"68%", w:48},
+  {l:"79%", t:"73%", w:42},
+];
+function cellular(x,y,w,h,mode){
+  const cH=11,rows=Math.ceil(h/cH);
+  const bg  =mode==='blackout'?'#f0ece4':'#dff0fc';
+  const shad=mode==='blackout'?'#b4a898':'#b4c8d8';
+  const ln  =mode==='blackout'?'#a89888':'#a8bccc';
+  const rail=mode==='blackout'?'#b0a498':'#bcccd8';
+  let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${bg}"/>`;
+  if(mode!=='blackout') s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="white" opacity="0.68"/>`;
+  for(let i=0;i<rows;i++){
+    const ry=y+i*cH;if(ry>=y+h)break;
+    s+=`<rect x="${x}" y="${Math.min(ry+cH-2.6,y+h-2.6)}" width="${w}" height="2.6" fill="${shad}" opacity="0.6"/>`;
+    s+=`<line x1="${x}" y1="${ry}" x2="${x+w}" y2="${ry}" stroke="${ln}" stroke-width="0.75"/>`;
+  }
+  s+=`<rect x="${x}" y="${y}"     width="${w}" height="5.5" rx="1.5" fill="${rail}"/>`;
+  s+=`<rect x="${x}" y="${y+h-5}" width="${w}" height="5"   rx="1"   fill="${rail}"/>`;
+  return s;
+}
+function venetian(x,y,w,h){
+  const sH=7,gap=5,hd=10;
+  let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#c4e2f8"/>`;
+  s+=`<rect x="${x}" y="${y}" width="${w}" height="${hd}" rx="2" fill="#ccc4b8"/>`;
+  let sy=y+hd+2;
+  while(sy+sH<y+h-3){
+    s+=`<rect x="${x}" y="${sy+sH-1}" width="${w}" height="2" fill="rgba(0,0,0,0.09)"/>`;
+    s+=`<rect x="${x}" y="${sy}" width="${w}" height="${sH}" ry="2" fill="#f8f6f2"/>`;
+    sy+=sH+gap;
+  }
+  return s;
+}
+function zebraRoller(x,y,w,h){
+  const bH=11;
+  let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#d4eed4"/>`;
+  s+=`<rect x="${x}" y="${y}" width="${w}" height="9" rx="2" fill="#c8c0b8"/>`;
+  s+=`<rect x="${x}" y="${y+6}" width="${w}" height="3" fill="#b8b0a8"/>`;
+  let by=y+9,i=0;const ch=h-18;
+  while(by<y+9+ch){
+    const bh=Math.min(bH,y+9+ch-by);
+    if(i%2===0){
+      s+=`<rect x="${x}" y="${by}" width="${w}" height="${bh}" fill="#eaf4ea" opacity="0.8"/>`;
+      if(bh>4){s+=`<line x1="${x}" y1="${by+bh*.35}" x2="${x+w}" y2="${by+bh*.35}" stroke="#c4dcc4" stroke-width="0.4"/>`;s+=`<line x1="${x}" y1="${by+bh*.7}" x2="${x+w}" y2="${by+bh*.7}" stroke="#c4dcc4" stroke-width="0.4"/>`;}
+    }else{s+=`<rect x="${x}" y="${by}" width="${w}" height="${bh}" fill="#f5f3ef"/>`;}
+    s+=`<line x1="${x}" y1="${by+bh}" x2="${x+w}" y2="${by+bh}" stroke="#d0c8c0" stroke-width="0.5"/>`;
+    by+=bH;i++;
+  }
+  s+=`<rect x="${x+1}" y="${y+h-9}" width="${w-2}" height="8" rx="2" fill="#c4bcb4"/>`;
+  return s;
+}
+function tdbu(x,y,w,h){
+  const topGap=Math.floor(h*.17),botGap=Math.floor(h*.17);
+  const sY=y+topGap,sH=h-topGap-botGap,cH=11;
+  let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#c8e8f8"/>`;
+  s+=`<rect x="${x}" y="${sY}" width="${w}" height="${sH}" fill="#f4f8fc"/>`;
+  s+=`<rect x="${x}" y="${sY}" width="${w}" height="${sH}" fill="white" opacity="0.65"/>`;
+  const rows=Math.ceil(sH/cH);
+  for(let i=0;i<rows;i++){
+    const ry=sY+i*cH;if(ry>=sY+sH)break;
+    s+=`<rect x="${x}" y="${Math.min(ry+cH-2.6,sY+sH-2.6)}" width="${w}" height="2.6" fill="#b4c8d8" opacity="0.6"/>`;
+    s+=`<line x1="${x}" y1="${ry}" x2="${x+w}" y2="${ry}" stroke="#a8bccc" stroke-width="0.8"/>`;
+  }
+  s+=`<rect x="${x}" y="${sY-4}"    width="${w}" height="7" rx="2" fill="#bcccd8"/>`;
+  s+=`<rect x="${x}" y="${sY+sH-3}" width="${w}" height="7" rx="2" fill="#bcccd8"/>`;
+  s+=`<rect x="${x}" y="${y}"       width="${w}" height="5" rx="1.5" fill="#b8c8d4"/>`;
+  s+=`<rect x="${x}" y="${y+h-4}"   width="${w}" height="4" rx="1"   fill="#b8c8d4"/>`;
+  return s;
+}
+function drawCurtain(type,ox){
+  const x=GX+ox,y=GY,w=GW,h=GH;
+  if(type==='cl') return cellular(x,y,w,h,'light');
+  if(type==='cb') return cellular(x,y,w,h,'blackout');
+  if(type==='vn') return venetian(x,y,w,h);
+  if(type==='zr') return zebraRoller(x,y,w,h);
+  if(type==='td') return tdbu(x,y,w,h);
+  return '';
+}
+function hexSVG(c,w){const h=Math.round(w*.866);return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polygon points="${w/2},0 ${w},${h*.25} ${w},${h*.75} ${w/2},${h} 0,${h*.75} 0,${h*.25}" fill="${c}" opacity="0.6"/></svg>`;}
+function sqSVG(c,w){return `<svg width="${w}" height="${w}" viewBox="0 0 ${w} ${w}"><rect x="5" y="5" width="${w-10}" height="${w-10}" rx="4" fill="${c}" opacity="0.6"/></svg>`;}
+function slSVG(c,w){const h=Math.round(w*.7),n=5,sh=Math.floor((h-8)/n);let s=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">`;for(let i=0;i<n;i++)s+=`<rect x="2" y="${4+i*(sh+2)}" width="${w-4}" height="${sh}" rx="${Math.ceil(sh/2)}" fill="${c}" opacity="0.58"/>`;return s+`</svg>`;}
+function zbSVG(c,w){const id='z'+Math.random().toString(36).substr(2,6),h=w,n=6,bh=h/n;let s=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><clipPath id="${id}"><rect width="${w}" height="${h}" rx="6"/></clipPath></defs><g clip-path="url(#${id})"><rect width="${w}" height="${h}" fill="${c}" opacity="0.14"/>`;for(let i=0;i<n;i++)if(i%2===0)s+=`<rect y="${i*bh}" width="${w}" height="${bh}" fill="${c}" opacity="0.52"/>`;return s+`</g></svg>`;}
+function tdSVG(c,w){return `<svg width="${w}" height="${w}" viewBox="0 0 ${w} ${w}"><rect x="3" y="3" width="${w-6}" height="${w*.36}" rx="4" fill="${c}" opacity="0.6"/><rect x="3" y="${w*.62}" width="${w-6}" height="${w*.36}" rx="4" fill="${c}" opacity="0.6"/></svg>`;}
+function makeShape(t,c,w){if(t==='hex')return hexSVG(c,w);if(t==='sq')return sqSVG(c,w);if(t==='sl')return slSVG(c,w);if(t==='zb')return zbSVG(c,w);if(t==='td')return tdSVG(c,w);return '';}
+function createFloats(p,opacity,offsetY){
+  const layer=document.getElementById('floats');
+  POSITIONS.forEach(pos=>{
+    const div=document.createElement('div');div.className='floating-el';
+    div.style.cssText=`left:${pos.l};top:${pos.t};opacity:${opacity};transform:translateY(${offsetY}px);`;
+    div.innerHTML=makeShape(p.shape,p.tc,pos.w);layer.appendChild(div);
+  });
+}
+function setSlot(s,p,ox){document.getElementById(s==='a'?'ca':'cb').innerHTML=drawCurtain(p.type,ox);}
+function applyUI(p){
+  document.getElementById('bg').style.background=p.bg;
+  const el=document.getElementById('word');
+  if(Array.isArray(p.word)){
+    el.style.cssText=`position:absolute;left:0;top:0;width:100%;height:100%;font-weight:900;pointer-events:none;opacity:1;color:${p.tc};`;
+    el.innerHTML=
+      `<span style="position:absolute;left:5%;top:33%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[0]}</span>`+
+      `<span style="position:absolute;right:3%;top:52%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[1]}</span>`;
+  }else{
+    el.style.cssText=`position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:900;line-height:1;pointer-events:none;text-align:center;white-space:nowrap;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;color:${p.tc};opacity:1;`;
+    el.textContent=p.word;
+  }
+  const btn=document.getElementById('shop-btn');
+  btn.style.borderColor=p.tc;
+  btn.style.color=p.tc;
+}
+function applyStatic(p){
+  applyUI(p);
+  const sl=document.getElementById('slider');
+  sl.style.transition='none';sl.style.transform='translateX(0)';
+  setSlot('a',p,0);setSlot('b',p,GW);
+  document.getElementById('floats').innerHTML='';
+  createFloats(p,1,0);
+}
+let current=0,animating=false;
+const DUR=520;
+function go(dir){
+  if(animating)return;animating=true;
+  const next=(current+(dir>0?1:products.length-1))%products.length;
+  const nextP=products[next];
+  const sOut=dir>0?-70:70,sIn=dir>0?70:-70,ox=dir>0?GW:-GW;
+  const layer=document.getElementById('floats'),word=document.getElementById('word'),sl=document.getElementById('slider');
+  setSlot('b',nextP,ox);
+  const old=Array.from(layer.querySelectorAll('.floating-el'));
+  old.forEach(n=>{n.style.transition='transform 0.38s ease,opacity 0.32s ease';n.style.transform=`translateY(${sOut}px)`;n.style.opacity='0';});
+  word.style.transition='opacity 0.18s ease';word.style.opacity='0';
+  sl.style.transition='none';sl.style.transform='translateX(0)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    sl.style.transition=`transform ${DUR}ms cubic-bezier(0.7,0,0.3,1)`;
+    sl.style.transform=`translateX(${-ox}px)`;
+  }));
+  setTimeout(()=>{
+    applyUI(nextP);
+    old.forEach(n=>layer.removeChild(n));
+    createFloats(nextP,0,sIn);
+    requestAnimationFrame(()=>{
+      layer.querySelectorAll('.floating-el').forEach(n=>{
+        n.style.transition='transform 0.4s cubic-bezier(.2,0,.3,1),opacity 0.36s ease';
+        n.style.transform='translateY(0)';n.style.opacity='1';
+      });
+    });
+  },DUR/2);
+  setTimeout(()=>{sl.style.transition='none';sl.style.transform='translateX(0)';setSlot('a',nextP,0);setSlot('b',nextP,GW);current=next;animating=false;},DUR+20);
+}
+document.getElementById('btn-right').addEventListener('click',()=>go(1));
+document.getElementById('btn-left').addEventListener('click',()=>go(-1));
+applyStatic(products[0]);
+</script>
+
+  </div>
+</div>
+<script>
+(function(){
+  const shopBtn = document.getElementById('shop-btn');
+  if (shopBtn) {
+    shopBtn.textContent = '進入圖庫';
+    shopBtn.addEventListener('click', function(){
+      const ov = document.getElementById('introOverlay');
+      ov.style.opacity = '0';
+      ov.style.visibility = 'hidden';
+      setTimeout(()=>{ ov.remove(); }, 600);
+    });
+  }
+})();
+</script>
+<!-- ════════ END INTRO ════════ -->
+
 
 <div class="header">
   <div class="header-logo">商品<span>圖庫</span></div>
@@ -533,7 +789,7 @@ function renderGrid() {
   const grid = document.getElementById('imageGrid');
   if (!filtered.length) {
     grid.innerHTML = `<div class="empty">
-      <svg class="empty-cloud" viewBox="0 0 120 70" fill="#DCD2F0"><path d="M95 38c0-2 .3-3.8.3-5.8C95.3 19.6 85.2 9.5 72.6 9.5c-9 0-16.8 5.3-20.5 12.9-2.4-1.6-5.3-2.6-8.4-2.6-8.3 0-15 6.7-15 15 0 .9.1 1.8.2 2.7C21.6 39 16 45.5 16 53.3 16 62.5 23.5 70 32.7 70h62.6c8.7 0 15.7-7 15.7-15.7 0-8.4-6.6-15.3-15-16.3z"/></svg>
+      <svg class="empty-cloud" viewBox="0 0 120 70" fill="#DEDEDE"><path d="M95 38c0-2 .3-3.8.3-5.8C95.3 19.6 85.2 9.5 72.6 9.5c-9 0-16.8 5.3-20.5 12.9-2.4-1.6-5.3-2.6-8.4-2.6-8.3 0-15 6.7-15 15 0 .9.1 1.8.2 2.7C21.6 39 16 45.5 16 53.3 16 62.5 23.5 70 32.7 70h62.6c8.7 0 15.7-7 15.7-15.7 0-8.4-6.6-15.3-15-16.3z"/></svg>
       <h3>${filterState.type==='all'&&!q?'還沒有圖片':'找不到圖片'}</h3>
       <p>${filterState.type==='all'&&!q?'點右上角「同步圖庫」從 Google Sheet 載入':'換個關鍵字或分類試試'}</p>
     </div>`; return;
