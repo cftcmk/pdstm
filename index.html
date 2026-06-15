@@ -192,13 +192,13 @@
 <body>
 
 <!-- ════════ INTRO SPLASH ════════ -->
-<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background:#F4F4F4;display:flex;align-items:center;justify-content:center;transition:transform 0.7s cubic-bezier(0.7,0,0.2,1);">
-  <div style="width:100%;">
+<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background:#F4F4F4;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.7s cubic-bezier(0.7,0,0.2,1);">
+  <div id="introStageWrap" style="width:820px;height:540px;flex-shrink:0;">
 
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  #scene{position:relative;width:100%;max-width:820px;margin:0 auto;height:min(80vh,540px);overflow:hidden;border-radius:0;font-family:'Georgia',serif;user-select:none;}
-  .bg{position:fixed;inset:0;z-index:0;transition:background 0.5s ease;}
+  #scene{position:relative;width:820px;height:540px;overflow:visible;border-radius:0;font-family:'Georgia',serif;user-select:none;transform-origin:center center;}
+  .bg{position:absolute;inset:0;z-index:0;transition:background 0.5s ease;}
   #word{position:absolute;font-weight:900;pointer-events:none;}
   .window-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:138px;z-index:10;}
 
@@ -431,6 +431,31 @@ applyStatic(products[0]);
   </div>
 </div>
 <script>
+(function(){
+  // ── Scale stage to fill viewport (cover) ──
+  function fitStage(){
+    const scene = document.getElementById('scene');
+    if (!scene) return;
+    const W = 820, H = 540;
+    const sx = window.innerWidth / W;
+    const sy = window.innerHeight / H;
+    const scale = Math.max(sx, sy); // cover = fill whole screen
+    scene.style.transform = 'scale(' + scale + ')';
+  }
+  fitStage();
+  window.addEventListener('resize', fitStage);
+
+  // Mirror the scene background colour onto the full-screen overlay so the
+  // backdrop is always truly full-bleed regardless of stage scaling.
+  const bgEl = document.getElementById('bg');
+  const ovEl = document.getElementById('introOverlay');
+  if (bgEl && ovEl) {
+    const sync = () => { ovEl.style.background = bgEl.style.background || '#F4F4F4'; };
+    sync();
+    new MutationObserver(sync).observe(bgEl, { attributes:true, attributeFilter:['style'] });
+  }
+})();
+
 (function(){
   const INTRO_KEY = 'imgLib_introLastShown';
   const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
