@@ -192,12 +192,12 @@
 <body>
 
 <!-- ════════ INTRO SPLASH ════════ -->
-<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background:#F4F4F4;transition:transform 0.7s cubic-bezier(0.7,0,0.2,1);">
-  <div style="width:100%;height:100%;">
+<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background:#F4F4F4;display:flex;align-items:center;justify-content:center;transition:transform 0.7s cubic-bezier(0.7,0,0.2,1);">
+  <div style="width:100%;">
 
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  #scene{position:relative;width:100%;max-width:820px;margin:0 auto;height:100vh;overflow:hidden;border-radius:0;font-family:'Georgia',serif;user-select:none;}
+  #scene{position:relative;width:100%;max-width:820px;margin:0 auto;height:min(80vh,540px);overflow:hidden;border-radius:0;font-family:'Georgia',serif;user-select:none;}
   .bg{position:fixed;inset:0;z-index:0;transition:background 0.5s ease;}
   #word{position:absolute;font-weight:900;pointer-events:none;}
   .window-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:138px;z-index:10;}
@@ -375,8 +375,8 @@ function applyUI(p){
   if(Array.isArray(p.word)){
     el.style.cssText=`position:absolute;left:0;top:0;width:100%;height:100%;font-weight:900;pointer-events:none;opacity:1;color:${p.tc};`;
     el.innerHTML=
-      `<span style="position:absolute;left:5%;top:33%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[0]}</span>`+
-      `<span style="position:absolute;right:3%;top:52%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[1]}</span>`;
+      `<span style="position:absolute;left:9%;top:30%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[0]}</span>`+
+      `<span style="position:absolute;right:9%;top:56%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[1]}</span>`;
   }else{
     el.style.cssText=`position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:900;line-height:1;pointer-events:none;text-align:center;white-space:nowrap;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;color:${p.tc};opacity:1;`;
     el.textContent=p.word;
