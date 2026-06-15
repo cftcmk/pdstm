@@ -375,8 +375,8 @@ function applyUI(p){
   if(Array.isArray(p.word)){
     el.style.cssText=`position:absolute;left:0;top:0;width:100%;height:100%;font-weight:900;pointer-events:none;opacity:1;color:${p.tc};`;
     el.innerHTML=
-      `<span style="position:absolute;left:9%;top:30%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[0]}</span>`+
-      `<span style="position:absolute;right:9%;top:56%;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[1]}</span>`;
+      `<span style="position:absolute;left:8%;top:50%;transform:translateY(-50%);font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[0]}</span>`+
+      `<span style="position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:${p.wSz}px;letter-spacing:${p.wSp}px;white-space:nowrap">${p.word[1]}</span>`;
   }else{
     el.style.cssText=`position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:900;line-height:1;pointer-events:none;text-align:center;white-space:nowrap;font-size:${p.wSz}px;letter-spacing:${p.wSp}px;color:${p.tc};opacity:1;`;
     el.textContent=p.word;
