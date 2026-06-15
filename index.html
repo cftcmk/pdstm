@@ -200,7 +200,7 @@
   #scene{position:relative;width:820px;height:540px;overflow:visible;border-radius:0;font-family:'Georgia',serif;user-select:none;transform-origin:center center;}
   .bg{position:absolute;inset:0;z-index:0;transition:background 0.5s ease;}
   #word{position:absolute;font-weight:900;pointer-events:none;}
-  .window-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:138px;z-index:10;}
+  .window-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:104px;z-index:10;}
 
   /* arrows at far sides, vertically between the two TDBU text lines */
   .nav-btn{
@@ -212,16 +212,16 @@
     box-shadow:0 1px 6px rgba(0,0,0,0.1);
   }
   .nav-btn:hover{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.15);}
-  .nav-btn.left{left:10px;}
-  .nav-btn.right{right:10px;}
+  .nav-btn.left{left:24px;}
+  .nav-btn.right{right:24px;}
 
   .floating-el{position:absolute;pointer-events:none;will-change:transform,opacity;}
 
   /* Explore button: lifts on hover, presses on click */
   .explore-btn{
-    position:absolute;bottom:28px;left:50%;
+    position:absolute;bottom:36px;left:50%;
     transform:translateX(-50%);
-    padding:10px 34px;border-radius:999px;
+    padding:9px 30px;border-radius:999px;
     background:transparent;font-size:14px;cursor:pointer;
     z-index:20;font-family:inherit;
     border:1.5px solid currentColor;
@@ -268,11 +268,11 @@
 <script>
 const GX=14,GY=22,GW=120,GH=188;
 const products=[
-  {word:"Cellular Shade", wSz:68, wSp:7,  bg:"#d4e8f6", tc:"#1a4060", type:"cl", shape:"hex"},
-  {word:"Blackout",       wSz:80, wSp:13, bg:"#c0cad4", tc:"#18242e", type:"cb", shape:"sq"},
-  {word:"Venetian",       wSz:80, wSp:13, bg:"#ecddd0", tc:"#503820", type:"vn", shape:"sl"},
-  {word:"Zebra Roller",   wSz:70, wSp:9,  bg:"#d0e0cc", tc:"#1e3e1c", type:"zr", shape:"zb"},
-  {word:["Top Down","Bottom Up"], wSz:64, wSp:2, bg:"#ddd0e4", tc:"#3c2858", type:"td", shape:"td"},
+  {word:"Cellular Shade", wSz:46, wSp:5,  bg:"#d4e8f6", tc:"#1a4060", type:"cl", shape:"hex"},
+  {word:"Blackout",       wSz:54, wSp:9,  bg:"#c0cad4", tc:"#18242e", type:"cb", shape:"sq"},
+  {word:"Venetian",       wSz:54, wSp:9,  bg:"#ecddd0", tc:"#503820", type:"vn", shape:"sl"},
+  {word:"Zebra Roller",   wSz:48, wSp:6,  bg:"#d0e0cc", tc:"#1e3e1c", type:"zr", shape:"zb"},
+  {word:["Top Down","Bottom Up"], wSz:42, wSp:2, bg:"#ddd0e4", tc:"#3c2858", type:"td", shape:"td"},
 ];
 const POSITIONS=[
   {l:"7%",  t:"9%",  w:50},
@@ -444,6 +444,13 @@ applyStatic(products[0]);
   }
   fitStage();
   window.addEventListener('resize', fitStage);
+
+  // Move nav arrows + Explore button OUT of the scaled scene so they stay normal size
+  const ov0 = document.getElementById('introOverlay');
+  ['btn-left','btn-right','shop-btn'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el && ov0) ov0.appendChild(el);
+  });
 
   // Mirror the scene background colour onto the full-screen overlay so the
   // backdrop is always truly full-bleed regardless of stage scaling.
